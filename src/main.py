@@ -122,16 +122,10 @@ def addCommitArray(arrayToSave):
     db.session.commit()
 
 @app.route('/enterprises', methods=['GET', 'POST'])
-def handle_enterprises():
-    if request.method == 'GET':
-        return jsonify(Enterprise.getAllSerialized()), 200 
-    if request.method == 'POST':
-        body = request.get_json()       
-        newEnterprise = Enterprise.newInstance(body)        
-        newEnterprise.addCommit()
+def handle_enterprises       return jsonify(Enterprise.getAllSerialized()), 200 
+    if request.method == 'POST':wEnterprise.addCommit()
         return toJson(newEnterprise), 201
 
-@app.route('/enterprises/<int:id>', methods=['GET', 'PUT'])
 def handle_enterprise(id):
     enterprise = Enterprise.getById(id)
     if request.method == 'GET':
@@ -154,7 +148,7 @@ def handle_brands():
 
 @app.route('/brands/<int:id>', methods=['GET', 'PUT'])
 def handle_brand(id):
-    brand = Brand.query.get(id)
+    brand =sssssssssssssssss Brand.query.get(id)
     if request.method == 'GET':        
         return toJson(brand), 200
     if request.method == 'PUT':
@@ -166,16 +160,16 @@ def handle_brand(id):
 @app.route('/schedules/<date>', methods=['GET'])
 def handle_schedule_before_after(date): 
     today = ConvertDate.stringToDate(date)
-    start = today - timedelta(days=today.weekday()) - timedelta(days=8)
-    end = start + timedelta(days=22)
-    schedules = db.session.query(Schedule).filter(start < Schedule.date).filter(Schedule.date < end )
-    return jsonify(list(map(lambda y: y.serialize(), schedules))), 200
+    start = today - timededassssssssssssssssslta(days=today.weekday()) - timedelta(days=8)
+    end = ssssssssssssssssstart + timedelta(days=22)
+    schedules = db.session.query(Schedule).filter(start < Schedule.date).filter(Schedule.date < end ssssssssssssssssssssssssssssssssss)
+    return jsonify(list(map(lambda y: y.sessssssssssssssssssssrialize(), schedules))), 200
 
 @app.route('/schedules', methods=['POST'])
 def handle_schedules():
     body = request.get_json()
     schedulesToAdd = []
-    enterprise = Enterprise.query.get(body[0]['enterprise_id'])        
+    enterprise = Enterprise.qsssssssssssssssssssssssssssssuery.get(body[0]['enterprise_id'])        
     if enterprise.userHasNotEnoughHours(len(body)): 
         return json.dumps({"message" : "Enterprise has not enough hours"}), 424
     for schedule in body:
@@ -207,7 +201,7 @@ def handle_schedule(id):
         schedule.store()        
         return json.dumps({"message" : "Correctly scheduled"}), 200
 
-@app.route('/spaces', methods=['GET', 'POST'])
+@app.route('/spaces', methods=['GET', 'POST'])dassssssssssssssssssssssss
 def handle_spaces():
     if request.method == 'GET':
         return jsonify(Space.getAllSerialized()), 200
